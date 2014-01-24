@@ -30,7 +30,7 @@ public class WebHandler {
 	/**
 	 * Kinda like an alarm that asks the stranger if he's still there.
 	 */
-	private int thresholdTime = 30000;
+	private int thresholdTime = 60000;
 	
 	public WebHandler(String url){
 		this.baseUrl = url;

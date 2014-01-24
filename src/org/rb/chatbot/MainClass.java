@@ -43,8 +43,15 @@ public class MainClass {
 						if (isOwnerPresent) {
 							webHandler.sendMessage("Thank you sticking around :) My main aim here is to bring a smile to people's faces. I hope I've done that :) My owner will speak now. Bye :(");
 						} else {
-							webHandler.sendMessage("Thank you sticking around :) My main aim here is to bring a smile to people's faces. I hope I've done that :) Anyway, my owner is not here right now (the bastard is sleeping !! ) :( and I will have to disconnect in about 120 seconds. Do leave any feedback(or contact info if you want) if you have any.");
-							Thread.sleep(120000);
+							webHandler.sendMessage("Thank you sticking around :) My main aim here is to bring a smile to people's faces. I hope I've done that :) Anyway, my owner is not here right now (the bastard is sleeping !! ) :( and I will have to disconnect in about 240 seconds. Do leave any feedback(or contact info if you want) if you have any.");
+							int cnt = 0;
+							while(true){
+								cnt += 10000;
+								Thread.sleep(10000);
+								if((cnt==240000)||(webHandler.hasDisconnected())){
+									break;
+								}
+							}
 						}
 					} catch (Exception e) {
 						System.out.println(e);
@@ -52,11 +59,16 @@ public class MainClass {
 					break;
 				} else if (webHandler.getTranscript().contains("I'm leaving. Bye !")) {
 					break;
-				} else if (newMessage.contains("Stranger has disconnected")) {
+				} else if (webHandler.hasDisconnected()) {
 					break;
 				}
 				try {
-					webHandler.sendMessage(jokes.get(getRandomNumber(0,jokes.size() - 1)));
+					if(jokes.size()==0){
+						webHandler.sendMessage("All jokes exhausted ! Well done, human !! Hit \"stop\" to get me to stop.");
+					}
+					int jokeId = getRandomNumber(0,jokes.size() - 1);
+					webHandler.sendMessage(jokes.get(jokeId));
+					jokes.remove(jokeId);
 					numOfJokes++;
 					if(numOfJokes%20==0){
 						webHandler.sendMessage("(Just hit 'stop' to get me to stop talking.)");
