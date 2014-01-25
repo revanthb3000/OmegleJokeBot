@@ -5,6 +5,11 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+/**
+ * This is the core part of the application. This handles the WebDriver Firefox Browser and has control functions.
+ * @author RB
+ *
+ */
 public class WebHandler {
 	
 	/**
@@ -30,10 +35,19 @@ public class WebHandler {
 	/**
 	 * Kinda like an alarm that asks the stranger if he's still there.
 	 */
-	private int thresholdTime = 60000;
+	private static final int THRESHOLD_TIME = 60000;
+	
+	/**
+	 * This is for the brief periods where I put the bot to sleep.
+	 */
+	private static final int INTERMEDIATE_WAITING_TIME = 2000;
 	
 	public WebHandler(String url){
 		this.baseUrl = url;
+	}
+	
+	public String getNewMessage() {
+		return newMessage;
 	}
 	
 	/**
@@ -49,6 +63,14 @@ public class WebHandler {
 	 */
 	public void stopBrowser(){
 		driver.quit();
+	}
+	
+	/**
+	 * This function is used to add those tags you see on Omegle. Quite useful if you want to avoid spam bots! No one wants a bot vs bot battle.
+	 * @param topic
+	 */
+	public void addTopic(String topic){
+	    driver.findElement(By.cssSelector("input.newtopicinput")).sendKeys(topic + "\n");
 	}
 	
 	/**
@@ -68,10 +90,6 @@ public class WebHandler {
 		addTopic("laugh");
 		
 		driver.findElement(By.id("textbtn")).click();
-	}
-	
-	public void addTopic(String topic){
-	    driver.findElement(By.cssSelector("input.newtopicinput")).sendKeys(topic + "\n");
 	}
 
 	/**
@@ -121,9 +139,9 @@ public class WebHandler {
 		int waitedTime = 0;
 		int count = 0;
 		while(!hasNewMessageArrived()){
-			Thread.sleep(2000);
-			waitedTime += 2000;
-			if(waitedTime>=thresholdTime){
+			Thread.sleep(INTERMEDIATE_WAITING_TIME);
+			waitedTime += INTERMEDIATE_WAITING_TIME;
+			if(waitedTime>=THRESHOLD_TIME){
 				sendMessage("You still there ?");
 				waitedTime = 0;
 				count++;
@@ -135,23 +153,31 @@ public class WebHandler {
 		}
 	}
 	
+	/**
+	 * This is during the "Finding stranger to chat with" phase.
+	 * A simple wait function.
+	 * @throws InterruptedException
+	 */
 	public void waitForChatStart() throws InterruptedException{
 		while(!getTranscript().contains(ConstantTextStrings.INTRO_MESSAGE)){
-			Thread.sleep(2000);
+			Thread.sleep(INTERMEDIATE_WAITING_TIME);
 		}
 	}
 	
+	/**
+	 * Alas !! The end of the conversation.
+	 */
 	public void disconnect(){
 	    driver.findElement(By.cssSelector("button.disconnectbtn")).click();
 	    driver.findElement(By.cssSelector("button.disconnectbtn")).click();
 	}
 	
+	/**
+	 * Basically checks if the conversation is over. Returns a boolean that indicates so.
+	 * @return
+	 */
 	public Boolean hasDisconnected(){
 		return (getTranscript().contains("Stranger has disconnected"))||(getTranscript().contains("You have disconnected"));
-	}
-
-	public String getNewMessage() {
-		return newMessage;
 	}
 	
 }
