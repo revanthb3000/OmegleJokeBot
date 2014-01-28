@@ -54,20 +54,31 @@ public class MainClass {
 					newMessage = webHandler.getNewMessage();
 					
 					if (newMessage.toLowerCase().contains("stop")) {
+						Boolean shouldRestart = false;
 						if (isOwnerPresent) {
 							webHandler.sendMessage(ConstantTextStrings.BOT_GOODBYE_OWNER_PRESENT);
 						} else {
 							webHandler.sendMessage(ConstantTextStrings.BOT_GOODBYE_OWNER_NOT_PRESENT);
+							webHandler.sendMessage(ConstantTextStrings.BOT_TECH_STUFF);
+							webHandler.sendMessage(ConstantTextStrings.BOT_RESTART_INSTRUCTIONS);
+							String chatTranscript = webHandler.getTranscript();
 							int cnt = 0;
 							while (true) {
-								cnt += 10000;
-								Thread.sleep(10000);
+								String newMessages = webHandler.getTranscript().replace(chatTranscript, "").trim();
+								if(newMessages.toLowerCase().contains("restart")){
+									shouldRestart = true;
+									break;
+								}
+								cnt += 5000;
+								Thread.sleep(5000);
 								if ((cnt == 240000) || (webHandler.hasDisconnected())) {
 									break;
 								}
 							}
 						}
-						break;
+						if(!shouldRestart){
+							break;
+						}
 					} else if ((webHandler.getTranscript().contains("I'm leaving. Bye !") || webHandler.hasDisconnected())) {
 						break;
 					}
