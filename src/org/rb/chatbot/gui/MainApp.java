@@ -1,14 +1,16 @@
-package org.rb.gui;
+package org.rb.chatbot.gui;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
 
-import org.rb.chatbot.MainClass;
+import org.rb.chatbot.core.JokeBot;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainApp {
 
@@ -45,12 +47,13 @@ public class MainApp {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		final ArrayList<String> topics = new ArrayList<String>(Arrays.asList("jokes","comedy","funny","help","laugh","sad"));
 		
 		JButton btnNewButton = new JButton("Start Chat With Owner");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					MainClass.letsChat(true);
+					JokeBot.startJokeBotChat(true,topics);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -63,7 +66,7 @@ public class MainApp {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					MainClass.letsChat(false);
+					JokeBot.startJokeBotChat(false,topics);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}

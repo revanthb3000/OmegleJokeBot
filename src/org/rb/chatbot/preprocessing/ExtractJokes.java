@@ -1,4 +1,4 @@
-package org.rb.preprocessing;
+package org.rb.chatbot.preprocessing;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

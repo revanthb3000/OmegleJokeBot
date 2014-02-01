@@ -1,4 +1,4 @@
-package org.rb.chatbot;
+package org.rb.chatbot.core;
 
 /**
  * This class basically holds constant strings that we'll use.
@@ -26,6 +26,11 @@ public class ConstantTextStrings {
 	 * The first thing the bot says once the chat starts.
 	 */
 	public static final String BOT_WELCOME_MESSAGE = "Hi ! I have a confession to make: I'm a bot, not a spam bot, but a comedy bot. I'll be messaging jokes right now :-). I'll hit one joke for each message you send. TO STOP IT, just type \"stop\" and my human owner will talk if he is available. Okay ? :D ";
+	
+	/**
+	 * The message the bot hits when the human doesn't reply for a long time.
+	 */
+	public static final String BOT_WAITED_TOO_LONG = "I'm leaving. Bye !";
 
 	/**
 	 * The goodbye message when I'm around and spying.

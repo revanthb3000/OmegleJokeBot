@@ -1,5 +1,6 @@
-package org.rb.chatbot;
+package org.rb.chatbot.core;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.*;
@@ -77,17 +78,14 @@ public class WebHandler {
 	 * Basically visits your baseUrl link and starts over
 	 * @throws InterruptedException
 	 */
-	public void startNewChat() throws InterruptedException{
+	public void startNewChat(ArrayList<String> topics) throws InterruptedException{
 		chatTranscript = "";
 		newMessage = "";
 		driver.get(baseUrl);
-
-		addTopic("jokes");
-		addTopic("comedy");
-		addTopic("funny");
-		addTopic("sad");
-		addTopic("help");
-		addTopic("laugh");
+		
+		for(String topic : topics){
+			addTopic(topic);
+		}
 		
 		driver.findElement(By.id("textbtn")).click();
 	}
@@ -147,7 +145,7 @@ public class WebHandler {
 				count++;
 			}
 			if(count == 3){
-				sendMessage("I'm leaving. Bye !");
+				sendMessage(ConstantTextStrings.BOT_WAITED_TOO_LONG);
 				break;
 			}
 		}
