@@ -112,7 +112,6 @@ public class WebHandler {
 		}
 		newMessage = getTranscript();
 		newMessage = newMessage.replace(chatTranscript, "").trim();
-		System.out.println(newMessage);
 		return true;
 	}
 	
