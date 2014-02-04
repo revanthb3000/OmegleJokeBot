@@ -26,9 +26,17 @@ public class UtilityFunctions {
 	 * @throws IOException
 	 */
 	public static void writeToFile(String matter, String fileName) throws IOException {
-		FileWriter fileWriter = new FileWriter(fileName);
-		fileWriter.write(matter);
-		fileWriter.close();
+		Boolean replyPresent = false;
+		for(String message : matter.split("\\n")){
+			if(message.contains("Stranger:")){
+				replyPresent = true;
+			}
+		}
+		if(replyPresent){
+			FileWriter fileWriter = new FileWriter(fileName);
+			fileWriter.write(matter);
+			fileWriter.close();	
+		}
 	}
 	
 	/**
