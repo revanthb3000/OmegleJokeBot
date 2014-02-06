@@ -15,7 +15,7 @@ public class JokeBot {
 	 */
 	public static void startJokeBotChat(Boolean isOwnerPresent,
 			ArrayList<String> topics) throws Exception {
-		ArrayList<String> jokes = ExtractJokes.getJokesList();
+		ArrayList<String> jokesDataset = ExtractJokes.getJokesList();
 		WebHandler webHandler = new WebHandler(ConstantTextStrings.WEBSITE_URL);
 		webHandler.startBrowser();
 		while (true) {
@@ -23,6 +23,7 @@ public class JokeBot {
 					+ ".txt";
 			String newMessage = "";
 			int numOfJokes = 0;
+			ArrayList<String> jokes = new ArrayList<String>(jokesDataset);
 
 			webHandler.startNewChat(topics);
 			webHandler.waitForChatStart();
