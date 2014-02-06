@@ -13,83 +13,97 @@ public class JokeBot {
 	 * @param isOwnerPresent
 	 * @throws Exception
 	 */
-	public static void startJokeBotChat(Boolean isOwnerPresent, ArrayList<String> topics) throws Exception {
+	public static void startJokeBotChat(Boolean isOwnerPresent,
+			ArrayList<String> topics) throws Exception {
 		ArrayList<String> jokes = ExtractJokes.getJokesList();
 		WebHandler webHandler = new WebHandler(ConstantTextStrings.WEBSITE_URL);
 		webHandler.startBrowser();
 		while (true) {
-			try {
-				String fileName = "convs/" + UtilityFunctions.getCurrentTimeStamp() + ".txt";
-				String newMessage = "";
-				int numOfJokes = 0;
+			String fileName = "convs/" + UtilityFunctions.getCurrentTimeStamp()
+					+ ".txt";
+			String newMessage = "";
+			int numOfJokes = 0;
 
-				webHandler.startNewChat(topics);
-				webHandler.waitForChatStart();
+			webHandler.startNewChat(topics);
+			webHandler.waitForChatStart();
+
+			try {
 				webHandler.sendMessage(ConstantTextStrings.BOT_WELCOME_MESSAGE);
 
-				//This loop is the course of the whole chat.
+				// This loop is the course of the whole chat.
 				while (true) {
 					webHandler.waitForNewMessage();
 					newMessage = webHandler.getNewMessage();
-					
+
 					if (newMessage.toLowerCase().contains("stop")) {
-						Boolean shouldRestart = stopJokeBot(webHandler, isOwnerPresent);
-						if(!shouldRestart){
+						Boolean shouldRestart = stopJokeBot(webHandler,
+								isOwnerPresent);
+						if (!shouldRestart) {
 							break;
 						}
-					} else if ((webHandler.getTranscript().contains(ConstantTextStrings.BOT_WAITED_TOO_LONG) || webHandler.hasDisconnected())) {
+					} else if ((webHandler.getTranscript().contains(
+							ConstantTextStrings.BOT_WAITED_TOO_LONG) || webHandler
+							.hasDisconnected())) {
 						break;
 					}
-					
+
 					webHandler.sendMessage(getRandomJoke(jokes));
 					numOfJokes++;
 					if (numOfJokes % 20 == 0)
-						webHandler.sendMessage(ConstantTextStrings.BOT_STOP_REMINDER);
+						webHandler
+								.sendMessage(ConstantTextStrings.BOT_STOP_REMINDER);
 				}
-				
+
 				if (!webHandler.hasDisconnected())
 					webHandler.disconnect();
-				
-				UtilityFunctions.writeToFile(webHandler.getTranscript(), fileName);
+
+				UtilityFunctions.writeToFile(webHandler.getTranscript(),
+						fileName);
 			} catch (Exception e) {
 				System.out.println(e);
 				continue;
 			}
 		}
 	}
-	
+
 	/**
 	 * This basically handles the situation when the user tells the bot to stop.
+	 * 
 	 * @param webHandler
 	 * @param isOwnerPresent
 	 * @return
 	 * @throws InterruptedException
 	 */
-	public static Boolean stopJokeBot(WebHandler webHandler, Boolean isOwnerPresent) throws InterruptedException{
+	public static Boolean stopJokeBot(WebHandler webHandler,
+			Boolean isOwnerPresent) throws InterruptedException {
 		Boolean shouldRestart = false;
 		String chatTranscript = "";
 		if (isOwnerPresent) {
 			chatTranscript = webHandler.getTranscript();
-			webHandler.sendMessage(ConstantTextStrings.BOT_GOODBYE_OWNER_PRESENT);
+			webHandler
+					.sendMessage(ConstantTextStrings.BOT_GOODBYE_OWNER_PRESENT);
 			String newMessages = "";
-			while (!webHandler.hasDisconnected()){
-				newMessages = webHandler.getTranscript().replace(chatTranscript, "").trim();
-				if(newMessages.toLowerCase().contains("restart")){
+			while (!webHandler.hasDisconnected()) {
+				newMessages = webHandler.getTranscript()
+						.replace(chatTranscript, "").trim();
+				if (newMessages.toLowerCase().contains("restart")) {
 					shouldRestart = true;
 					break;
 				}
 				Thread.sleep(10000);
 			}
-		}
-		else {
-			webHandler.sendMessage(ConstantTextStrings.BOT_GOODBYE_OWNER_NOT_PRESENT);
+		} else {
+			webHandler
+					.sendMessage(ConstantTextStrings.BOT_GOODBYE_OWNER_NOT_PRESENT);
 			webHandler.sendMessage(ConstantTextStrings.BOT_TECH_STUFF);
-			webHandler.sendMessage(ConstantTextStrings.BOT_RESTART_INSTRUCTIONS);
+			webHandler
+					.sendMessage(ConstantTextStrings.BOT_RESTART_INSTRUCTIONS);
 			chatTranscript = webHandler.getTranscript();
 			int cnt = 0;
 			while (true) {
-				String newMessages = webHandler.getTranscript().replace(chatTranscript, "").trim();
-				if(newMessages.toLowerCase().contains("restart")){
+				String newMessages = webHandler.getTranscript()
+						.replace(chatTranscript, "").trim();
+				if (newMessages.toLowerCase().contains("restart")) {
 					shouldRestart = true;
 					break;
 				}
@@ -105,19 +119,20 @@ public class JokeBot {
 	}
 
 	/**
-	 * Picks up a random joke from the jokes ArrayList, shoots it and removes it from the list to ensure that it's not repeated again.
+	 * Picks up a random joke from the jokes ArrayList, shoots it and removes it
+	 * from the list to ensure that it's not repeated again.
+	 * 
 	 * @param jokes
 	 * @return
 	 */
-	public static String getRandomJoke(ArrayList<String> jokes){
+	public static String getRandomJoke(ArrayList<String> jokes) {
 		if (jokes.size() == 0) {
 			return ConstantTextStrings.BOT_JOKES_EXHAUSTED;
-		}
-		else{
+		} else {
 			int jokeId = UtilityFunctions.getRandomNumber(0, jokes.size() - 1);
 			String joke = jokes.get(jokeId);
 			jokes.remove(jokeId);
-			return joke;	
+			return joke;
 		}
 	}
 
