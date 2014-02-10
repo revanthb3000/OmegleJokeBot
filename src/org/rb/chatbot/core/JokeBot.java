@@ -81,8 +81,8 @@ public class JokeBot {
 		String chatTranscript = "";
 		if (isOwnerPresent) {
 			chatTranscript = webHandler.getTranscript();
-			webHandler
-					.sendMessage(ConstantTextStrings.BOT_GOODBYE_OWNER_PRESENT);
+			UtilityFunctions.playSound();
+			webHandler.sendMessage(ConstantTextStrings.BOT_GOODBYE_OWNER_PRESENT);
 			String newMessages = "";
 			while (!webHandler.hasDisconnected()) {
 				newMessages = webHandler.getTranscript()

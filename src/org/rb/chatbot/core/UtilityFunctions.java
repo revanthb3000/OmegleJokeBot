@@ -1,9 +1,16 @@
 package org.rb.chatbot.core;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javax.sound.midi.MidiSystem;
+import javax.sound.midi.Sequencer;
 
 public class UtilityFunctions {
 	
@@ -48,6 +55,23 @@ public class UtilityFunctions {
 	public static int getRandomNumber(int min, int max) {
 		int randomNumber = min + (int) (Math.random() * ((max - min) + 1));
 		return randomNumber;
+	}
+	
+	/**
+	 * Plays a midi file. Useful for alerts
+	 */
+	public static void playSound(){
+		try {
+			InputStream inputStream = new BufferedInputStream(new FileInputStream(new File("midifile.mid")));
+			Sequencer sequencer = MidiSystem.getSequencer();
+			sequencer.open();			
+		    sequencer.setSequence(inputStream);
+		    sequencer.start();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 	
 }
