@@ -67,6 +67,8 @@ public class UtilityFunctions {
 			sequencer.open();			
 		    sequencer.setSequence(inputStream);
 		    sequencer.start();
+		    Thread.sleep(5000);
+		    sequencer.stop();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
