@@ -62,7 +62,6 @@ public class JokeBot {
 						fileName);
 			} catch (Exception e) {
 				System.out.println(e);
-				continue;
 			}
 		}
 	}
