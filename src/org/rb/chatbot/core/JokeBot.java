@@ -109,7 +109,7 @@ public class JokeBot {
 				}
 				cnt += 5000;
 				Thread.sleep(5000);
-				if ((cnt == 240000) || (webHandler.hasDisconnected())) {
+				if ((cnt >= 240000) || (webHandler.hasDisconnected())) {
 					shouldRestart = false;
 					break;
 				}
