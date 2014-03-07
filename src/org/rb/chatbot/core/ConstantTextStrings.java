@@ -40,7 +40,12 @@ public class ConstantTextStrings {
 	/**
 	 * The goodbye message when I'm not around.
 	 */
-	public static final String BOT_GOODBYE_OWNER_NOT_PRESENT = "Thank you sticking around :) My main aim here is to bring a smile to people's faces. I hope I've done that :) Anyway, my owner is not here right now (the bastard is sleeping !! ) :( and I will have to disconnect in about 240 seconds. Do leave any feedback(or contact info if you want) if you have any. You can also follow my owner(cheap publicity if you ask me) on twitter - @revanthb3000";
+	public static final String BOT_GOODBYE_OWNER_NOT_PRESENT = "Thank you sticking around :) My main aim here is to bring a smile to people's faces. I hope I've done that :) Anyway, my owner is not here right now (the bastard is sleeping !! ) :( and I will have to disconnect in about 240 seconds. Do leave any feedback you have.";
+	
+	/**
+	 * The twitter plug in message
+	 */
+	public static final String BOT_TWITTER= "If you'd like, you could follow my owner on twitter @revanthb3000  He came up with this idea !!";
 	
 	/**
 	 * Technical Info about the bot !
