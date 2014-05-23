@@ -44,8 +44,9 @@ public class ConstantTextStrings {
 	
 	/**
 	 * The twitter plug in message
-	 */
-	public static final String BOT_TWITTER= "If you'd like, you could follow my owner on twitter @revanthb3000  He came up with this idea !!";
+	 */	
+	public static final String BOT_TWITTER= "You could follow my owner on twitter @revanthb3000."
+			+ "\nOr, you could kik me too ! My kik id is rbomeglebot.";
 	
 	/**
 	 * Technical Info about the bot !

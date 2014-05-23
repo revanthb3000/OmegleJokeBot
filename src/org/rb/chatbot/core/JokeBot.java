@@ -94,7 +94,7 @@ public class JokeBot {
 			}
 		} else {
 			webHandler.sendMessage(ConstantTextStrings.BOT_GOODBYE_OWNER_NOT_PRESENT);
-			webHandler.sendMessage(ConstantTextStrings.BOT_TECH_STUFF);
+			//webHandler.sendMessage(ConstantTextStrings.BOT_TECH_STUFF);
 			webHandler.sendMessage(ConstantTextStrings.BOT_TWITTER);
 			webHandler.sendMessage(ConstantTextStrings.BOT_RESTART_INSTRUCTIONS);
 			chatTranscript = webHandler.getTranscript();
