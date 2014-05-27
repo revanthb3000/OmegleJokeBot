@@ -37,29 +37,25 @@ public class JokeBot {
 					newMessage = webHandler.getNewMessage();
 
 					if (newMessage.toLowerCase().contains("stop")) {
-						Boolean shouldRestart = stopJokeBot(webHandler,
-								isOwnerPresent);
+						Boolean shouldRestart = stopJokeBot(webHandler, isOwnerPresent);
 						if (!shouldRestart) {
 							break;
 						}
 					} else if ((webHandler.getTranscript().contains(
-							ConstantTextStrings.BOT_WAITED_TOO_LONG) || webHandler
-							.hasDisconnected())) {
+							ConstantTextStrings.BOT_WAITED_TOO_LONG) || webHandler.hasDisconnected())) {
 						break;
 					}
 
 					webHandler.sendMessage(getRandomJoke(jokes));
 					numOfJokes++;
 					if (numOfJokes % 20 == 0)
-						webHandler
-								.sendMessage(ConstantTextStrings.BOT_STOP_REMINDER);
+						webHandler.sendMessage(ConstantTextStrings.BOT_STOP_REMINDER);
 				}
 
 				if (!webHandler.hasDisconnected())
 					webHandler.disconnect();
 
-				UtilityFunctions.writeToFile(webHandler.getTranscript(),
-						fileName);
+				UtilityFunctions.writeToFile(webHandler.getTranscript(),fileName);
 			} catch (Exception e) {
 				System.out.println(e);
 			}
@@ -83,16 +79,17 @@ public class JokeBot {
 			UtilityFunctions.playSound();
 			webHandler.sendMessage(ConstantTextStrings.BOT_GOODBYE_OWNER_PRESENT);
 			String newMessages = "";
+			
+			//Chat ends here. The owner can now speak and new messages are recorded.
 			while (!webHandler.hasDisconnected()) {
-				newMessages = webHandler.getTranscript()
-						.replace(chatTranscript, "").trim();
+				newMessages = webHandler.getTranscript().replace(chatTranscript, "").trim();
 				if (newMessages.toLowerCase().contains("restart")) {
 					shouldRestart = true;
 					break;
 				}
 				Thread.sleep(10000);
 			}
-		} else {
+		} else /*Owner is not preseent. */ {
 			webHandler.sendMessage(ConstantTextStrings.BOT_GOODBYE_OWNER_NOT_PRESENT);
 			//webHandler.sendMessage(ConstantTextStrings.BOT_TECH_STUFF);
 			webHandler.sendMessage(ConstantTextStrings.BOT_TWITTER);
@@ -100,8 +97,7 @@ public class JokeBot {
 			chatTranscript = webHandler.getTranscript();
 			int cnt = 0;
 			while (true) {
-				String newMessages = webHandler.getTranscript()
-						.replace(chatTranscript, "").trim();
+				String newMessages = webHandler.getTranscript().replace(chatTranscript, "").trim();
 				if (newMessages.toLowerCase().contains("restart")) {
 					shouldRestart = true;
 					break;
