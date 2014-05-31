@@ -13,14 +13,12 @@ public class JokeBot {
 	 * @param isOwnerPresent
 	 * @throws Exception
 	 */
-	public static void startJokeBotChat(Boolean isOwnerPresent,
-			ArrayList<String> topics) throws Exception {
+	public static void startJokeBotChat(Boolean isOwnerPresent, ArrayList<String> topics) throws Exception {
 		ArrayList<String> jokesDataset = ExtractJokes.getJokesList();
 		WebHandler webHandler = new WebHandler(ConstantTextStrings.WEBSITE_URL);
 		webHandler.startBrowser();
 		while (true) {
-			String fileName = "convs/" + UtilityFunctions.getCurrentTimeStamp()
-					+ ".txt";
+			String fileName = "convs/" + UtilityFunctions.getCurrentTimeStamp() + ".txt";
 			String newMessage = "";
 			int numOfJokes = 0;
 			ArrayList<String> jokes = new ArrayList<String>(jokesDataset);
@@ -38,11 +36,10 @@ public class JokeBot {
 
 					if (newMessage.toLowerCase().contains("stop")) {
 						Boolean shouldRestart = stopJokeBot(webHandler, isOwnerPresent);
-						if (!shouldRestart) {
+						if (!shouldRestart){
 							break;
 						}
-					} else if ((webHandler.getTranscript().contains(
-							ConstantTextStrings.BOT_WAITED_TOO_LONG) || webHandler.hasDisconnected())) {
+					} else if ((webHandler.getTranscript().contains(ConstantTextStrings.BOT_WAITED_TOO_LONG) || webHandler.hasDisconnected())) {
 						break;
 					}
 
@@ -87,12 +84,12 @@ public class JokeBot {
 					shouldRestart = true;
 					break;
 				}
-				Thread.sleep(10000);
+				Thread.sleep(20000);
 			}
 		} else /*Owner is not preseent. */ {
 			webHandler.sendMessage(ConstantTextStrings.BOT_GOODBYE_OWNER_NOT_PRESENT);
-			//webHandler.sendMessage(ConstantTextStrings.BOT_TECH_STUFF);
 			webHandler.sendMessage(ConstantTextStrings.BOT_TWITTER);
+			webHandler.sendMessage(ConstantTextStrings.BOT_KIK);
 			webHandler.sendMessage(ConstantTextStrings.BOT_RESTART_INSTRUCTIONS);
 			chatTranscript = webHandler.getTranscript();
 			int cnt = 0;

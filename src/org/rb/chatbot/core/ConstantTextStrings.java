@@ -45,8 +45,13 @@ public class ConstantTextStrings {
 	/**
 	 * The twitter plug in message
 	 */	
-	public static final String BOT_TWITTER= "You could follow my owner on twitter @revanthb3000."
-			+ "\nOr, you could kik me too ! My kik id is rbomeglebot.";
+	public static final String BOT_TWITTER= "You could follow my owner on twitter @revanthb3000.";
+
+	/**
+	 * My Omegle Bot kik id
+	 */
+	public static final String BOT_KIK =  "Or, you could kik me too ! My kik id is rbomeglebot.";
+	
 	
 	/**
 	 * Technical Info about the bot !
