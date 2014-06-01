@@ -48,9 +48,9 @@ public class ConstantTextStrings {
 	public static final String BOT_TWITTER= "You could follow my owner on twitter @revanthb3000.";
 
 	/**
-	 * My Omegle Bot kik id
+	 * My Omegle Bot ids
 	 */
-	public static final String BOT_KIK =  "Or, you could kik me too ! My kik id is rbomeglebot.";
+	public static final String BOT_OTHER_SOCIAL_MEDIA =  "Or, you could contact me on other social networks. Look for rbomeglebot on kik, FB or GMail !";
 	
 	
 	/**

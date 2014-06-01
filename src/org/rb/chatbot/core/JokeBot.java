@@ -89,7 +89,7 @@ public class JokeBot {
 		} else /*Owner is not preseent. */ {
 			webHandler.sendMessage(ConstantTextStrings.BOT_GOODBYE_OWNER_NOT_PRESENT);
 			webHandler.sendMessage(ConstantTextStrings.BOT_TWITTER);
-			webHandler.sendMessage(ConstantTextStrings.BOT_KIK);
+			webHandler.sendMessage(ConstantTextStrings.BOT_OTHER_SOCIAL_MEDIA);
 			webHandler.sendMessage(ConstantTextStrings.BOT_RESTART_INSTRUCTIONS);
 			chatTranscript = webHandler.getTranscript();
 			int cnt = 0;
