@@ -14,6 +14,6 @@ Technical Info:
 * Selenium is used to interact with Omegle.
 * JokesDataSet was extracted from a couple of webpages.
 
-A couple of examples of what it does :
+Here's an example of what it does: http://goo.gl/30GQVG
 
-![alt tag](https://pbs.twimg.com/media/BwLO8XBIUAAhUCd.jpg)
+And here's how it helps people ^_^ : http://goo.gl/bAH6cE
