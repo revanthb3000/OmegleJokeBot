@@ -17,4 +17,3 @@ Technical Info:
 A couple of examples of what it does :
 
 ![alt tag](https://pbs.twimg.com/media/BwLO8XBIUAAhUCd.jpg)
-![alt tag](https://pbs.twimg.com/media/Bz4ooeICQAAqt-q.png:large)
